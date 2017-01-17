@@ -1,50 +1,21 @@
 @weatherforecastvalidation @devi
-
-
-
 Feature :  weather forecast validation
 
- 
-
- Scenario: when the user with out role to access openweatherforecast api enters valid city , not authorized message is displayed
-
-  
-
+Scenario: when the user with out role to access openweatherforecast api enters valid city , not authorized message is displayed
  Given a user with out role to access openweatherforecast api
-  
  When user connects to weather forecast
-  
  And the user enters valid city
-   
  Then 403 not authorized error is displayed
 
- 
-
  Scenario : when openweatherforecast api is not available, not available message is displayed
-
-  
-
   Given a user with role to access openweatherforecast api
- 
   And the openweatherforecast api is down
-  
   When user connects to weather forecast
-  
   And the user enters valid city
-  
   Then openweatherforecast is not available message is displayed
 
-
-
- 
-
- Scenario: when the user enters invalid city , invalid city please enter valid city message displayed
-
-  
-
+Scenario: when the user enters invalid city , invalid city please enter valid city message displayed
   Given a user with role to access openweatherforecast api
- 
   When user connects to weather forecast
-
   And the user enters invalid city
   Then "please enter valid city " message displayed
