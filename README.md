@@ -89,11 +89,11 @@ To run the project :
 
 for deployed versions in specific environments like d01 : 
 
-cuw.http.url=https://cuwd01.lwsdat.glb.bskyb.com 
+weatherforecast url=https://weatherforeastd01.com 
 #cuw.http.url=http://localhost:10091
 
 For testing locally : 
-#cuw.http.url=https://cuwd01.lwsdat.glb.bskyb.com 
+#cuw.http.url=https://weatherforecastd01.com
 cuw.http.url=http://localhost:10091
 
 make sure that localhost should be commented out.
@@ -109,4 +109,4 @@ make sure that localhost should be commented out.
 to run the specific feature file, select the webforecastcucumbertest file and click on run.
 
 
-If the time is given , we can update the code with the reusable methods, coding standards will be maintained.
+If the time is given , we can update the code with the reusable methods, coding standards will be maintained, automation framework will be completed, accessability can be done, cross browser testing, web services provided by api can also be automated .
