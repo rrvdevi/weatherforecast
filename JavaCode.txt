@@ -1,0 +1,160 @@
+
+
+commonsteps.java:
+
+@Given("^user with ([^\"]*) action$") 
+    public void getUserWithRole(String role)throws Throwable {
+        String actorRole = ACTORROLE.get(role);
+        if(actorRole == null) fail("Actor role not found for " + role + " permissions.");
+        
+        userWithWithoutActorRole("with", actorRole);
+        
+    }
+
+
+@Given("^user without ([^\"]*) action$") 
+    public void getUserWithoutRole(String role)throws Throwable {
+        String actorRole = ACTORROLE.get(role);
+        if(actorRole == null) fail("Actor role not found for " + role + " permissions.");
+        
+        userWithWithoutActorRole("without", actorRole);
+    }
+
+
+/*************************
+    //  WHEN  user CONNECT TO Weatherforecast
+/*************************
+    //This step connect to weatherforecast view with the user saved in a previous step in username and the predefined password
+    @When("^agent connects to weather forecast( without any flag)?$")
+    public static void connectCustomerView(String flag) throws Throwable {
+
+        try {
+            _connectToWeatherforecast(flag);
+        } catch (org.openqa.selenium.NoSuchElementException ex) {
+            WeatherforecastDriver.sleep(2000);
+            _connectToWeatherforecast(flag);
+        }
+    }
+
+
+
+    private static void _connectToWeatherforecast(String flag) throws Throwable {
+
+        hasflag = flag;
+        //If username was not previously set, use a default one.
+        if(username == null) username = "rvry";
+        String password = PASSWORD.get(username);
+        if(password == null) fail("Password not found for username: '" + username + "'.");
+
+        if (flag == null) {
+            weatherforecastDriver.openWeatherforecast();
+        } else {
+            weatherforecastDriver.openWeatherforecast();
+        }
+        weatherforecastDriver.login(username, password);
+
+            }
+
+
+
+weatherforecaststeps.java:
+
+AND :  	@And("^user enters valid city$")
+	public void I_give_valid_emailid() throws Throwable {
+	    // Express the Regexp above with the code you wish you had
+	    driver.findElement(By.id("City")).sendKeys("Edinburgh");
+	}
+
+
+Then :
+
+    @Then("^([^\"]*) is displayed $")
+    public void fieldHasLabel(String field) throws Throwable {
+        String testId = FIELDS.get(field);
+        if(testId == null) fail("Test id not found for field " + field);
+        String xpath = "//*[@data-testid='" + testId + "']/preceding-sibling::*[contains(@class,'label')]";
+        if(!weatherforecastDriver.hasText(xpath, label)){
+            throw new RuntimeException(field + " does not have label '" + label + "'");
+        }
+    }
+
+
+    @And("^user selects [^\"]*) day$")
+    public void hoverOverHelpType(String day) throws Throwable {
+        String xpath = "";
+        //days
+        if(day.contains("First") || day.contains("Second") || day.contains("third") || day.contains("fourth")|| day.contains("fifth"){
+            xpath = infoXpathDayManagement(day);
+        }
+        weatherforecastDriver.click(xpath);
+
+         }
+
+       
+          public static String infoXpathAddressManagement(String day){
+        String xpath;
+        
+       xpath = "//*[text()='" + day + "']";
+        
+        return xpath;
+
+
+    }
+
+
+Weatherforecastdriver.java
+
+
+package com.web.weatherforecast.driver;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.web.weatherforecast.driver.WebDriverFactory.Browser;
+
+import cucumber.api.Scenario;
+
+
+public class WeatherForecastDriver {
+
+    private  RemoteWebDriver webDriver;
+    private String windowHandle;
+    private int loadAttempt = 1;
+    
+    private static final String WEATHER_FORECAST_LOCALHOST_URL = "http://weatherforecast.com";
+    
+    
+    public WeatherForecastDriver(RemoteWebDriver driver) {
+        this.webDriver = driver;
+        
+    }
+    
+    public void closeDriver() {
+        if (webDriver != null) {
+            webDriver.quit();
+        }
+    }
+    
+    public void openWeatherforecast() {
+        webDriver.get(CUSTOMER_VIEW_LOCALHOST_URL );
+        windowHandle = webDriver.getWindowHandle();
+        webDriver.switchTo().window(windowHandle);
+    }
+
+}
+
+
+
+
+
+
+
+

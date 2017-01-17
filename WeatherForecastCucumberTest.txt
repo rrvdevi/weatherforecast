@@ -1,0 +1,16 @@
+package com.bskyb.web.customer;
+
+import org.junit.runner.RunWith;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(glue = { "com.web.weatherforecast.steps" , "com.web.weatherforecast.hooks"},
+        format = {"pretty", "html:target/cucumber-htmlreport", "json:target/cucumberReport/cucumber.json"},
+        features={"src/test/resources/features"},
+        tags={"@devi","~@mocked", "~@wip"})
+public class WeatherForecastCucumberTest {
+
+
+}
