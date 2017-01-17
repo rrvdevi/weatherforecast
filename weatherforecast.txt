@@ -1,82 +1,35 @@
 @weatherforecast @devi
-
-
-
-
 Feature :  weather forecast - country wise, city wise
 
-
-
- Scenario: when the user with role to access openweatherforecast api enters valid city , 5 day weather forecast is displayed
-
-  
+Scenario: when the user with role to access openweatherforecast api enters valid city , 5 day weather forecast is displayed
   Given a user with role to access openweatherforecast api
-
   When user connects to weather forecast
- 
   And the user enters valid city
-
-  Then 5 day weather forecast is displayed
-
-
-
+  Then five day weather forecast is displayed
 
 Scenario Outline : when the user enters valid city and clicks on specific day , 3 hourly forecast is displayed
-
- 
-
-
  Given a user with role to access openweatherforecast api
-
  When user connects to weather forecast
- 
  And the user enters valid city
-
  And the user selects <day>day
- 
- Then 3 hourly forecast is displayed
-
- 
-
+ Then three hourly forecast is displayed
  Examples:
- 
- |day |
- 
- |first|
- 
- |second|
- 
- |third |
- 
- |fourth|
-
- |fifth |
-
-
-  
+  |day |
+  |first|
+  |second|
+  |third |
+  |fourth|
+  |fifth |
 
 Scenario: when the user enters valid city and clicks on specific day , daily forecast summary is displayed
-
- 
-
    Given a user with role to access openweatherforecast api
-
    When user connects to weather forecast
-  
    And the user enters valid city
-   
    And the user selects day
- 
    Then 3 hourly forecast is displayed
-   
    And daily forecast summary is displayed
-   
    And the summary contains Most dominant condition
-  
    And the summary contains Most wind speed and direction
-  
    And the summary conations Aggregate rainfall
-   
    And the summary contains Minimum and maximum temperatures
- 
-   And the summary values are rounded down
+    And the summary values are rounded down
